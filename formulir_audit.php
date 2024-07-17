@@ -49,7 +49,7 @@ unset($_SESSION['error_message']);
                                 <div class="form-group w-100">
                                     <label>Pilih Kendaraan</label>
                                     <select class="form-control select2" name="id_kendaraan" id="selectKendaraan" required>
-                                        <option selected>Silahkan Pilih</option>
+                                        <option selected disabled>Silahkan Pilih</option>
                                         <?php
                                         $loop = mysqli_query($koneksi, "SELECT * FROM kendaraan");
                                         $no = 1;
@@ -234,7 +234,7 @@ unset($_SESSION['error_message']);
 
                                 <div class="form-group w-100 gambarInput" style="display: block;">
                                     <label for="gambar">Upload Gambar Bamper Depan</label>
-                                    <input type="file" class="form-control-file" id="" name="gambar_bamper_depan">
+                                    <input type="file" class="form-control-file" id="" name="gambar_bemper_depan">
                                 </div>
 
                                 <div class="form-group w-100">
@@ -249,7 +249,7 @@ unset($_SESSION['error_message']);
 
                                 <div class="form-group w-100 gambarInput" style="display: block;">
                                     <label for="gambar">Upload Gambar Bamper Belakang</label>
-                                    <input type="file" class="form-control-file" id="" name="gambar_bamper_belakang">
+                                    <input type="file" class="form-control-file" id="" name="gambar_bemper_belakang">
                                 </div>
 
                                 <div class="form-group w-100">
@@ -542,6 +542,14 @@ unset($_SESSION['error_message']);
                                 <div class="form-group w-100 gambarInput" style="display: none;">
                                     <label for="gambar">Upload Gambar IBM</label>
                                     <input type="file" class="form-control-file" id="gambar_ibm" name="gambar_ibm">
+                                </div>
+                                <div class="form-group w-100">
+                                    <label>Status Temuan</label>
+                                    <select class="form-control select2" name="status_temuan" id="ibm" required>
+                                        <option value="" selected disabled>Silahkan Pilih</option>
+                                        <option value="Open">Open</option>
+                                        <option value="Close">Close</option>
+                                    </select>
                                 </div>
 
                                 <div class="form-group">

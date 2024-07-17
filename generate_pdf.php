@@ -22,5 +22,5 @@ $dompdf->setPaper('A4', 'portrait');
 
 $dompdf->render();
 
-$dompdf->stream('laporan_Audit_Kendaraan_' . $date . '.pdf', array('Attachment' => true));
+$dompdf->stream('laporan_Audit_Kendaraan_' . $date . '.pdf', array('Attachment' => false));
 exit(0);

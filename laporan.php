@@ -187,6 +187,17 @@ require_once 'function.php';
         td>span {
             text-align: right;
         }
+
+        .image-title-container img {
+            max-width: 200px;
+            /* Gambar tidak akan melebihi lebar container */
+            height: auto;
+            /* Untuk mempertahankan aspek ratio gambar */
+            display: block;
+            /* Agar gambar tetap dalam flow dokumen */
+            margin: 0 auto;
+            /* Untuk memusatkan gambar jika diperlukan */
+        }
     </style>
 
 </head>
@@ -214,7 +225,7 @@ require_once 'function.php';
                                     <p style="font-size: large;">Informasi Kendaraan</p>
                                     <ul>
                                         <li>Nomor Plat: <?= $a['nomor_plat'] ?></li>
-                                        <li>Pemilik: <?= $a['nama_pemilik'] ?></li>
+                                        <li>Pemakai: <?= $a['nama_pemilik'] ?></li>
                                         <li>Telpon: <?= $a['nomor_telp_pemilik'] ?></li>
                                         <li>Jenis Kendaraan: <?= $a['jenis_kendaraan'] ?></li>
                                         <li>Kota: <?= $a['kota'] ?></li>
@@ -480,22 +491,26 @@ require_once 'function.php';
                                                         while ($g = mysqli_fetch_assoc($result_detail_gambar)) {
                                                     ?>
                                                             <!-- Bagian Dalam Kendaraan Start -->
-                                                            <h4 class="card-subtitle mb-3 mt-3" style="color:black; font-size:17px">Bagian Dalam Kendaraan</h4>
+                                                            <!-- <h4 class="card-subtitle mb-3 mt-3" style="color:black; font-size:17px">Bagian Dalam Kendaraan</h4> -->
                                                             <div class="row">
                                                                 <table style="width: 100%;">
                                                                     <tr>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color: black;"> Gambar Stiker:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_stiker']) ?>" width="100%" alt="<?= $g['gambar_stiker'] ?>" style="border: 1px solid black; margin-right: 20px;">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color: black;"> Gambar Sunvisor:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_sunvisor']) ?>" width="100%" alt="<?= $g['gambar_sunvisor'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
+                                                                        <?php if ($g['gambar_stiker'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar Stiker:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_stiker']) ?>" width="100%" alt="<?= $g['gambar_stiker'] ?>" style="border: 1px solid black; margin-right: 20px;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
+                                                                        <?php if ($g['gambar_sunvisor'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar Sunvisor:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_sunvisor']) ?>" width="100%" alt="<?= $g['gambar_sunvisor'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
                                                                     </tr>
                                                                 </table>
                                                             </div>
@@ -503,296 +518,358 @@ require_once 'function.php';
 
                                                                 <table style="width: 100%;">
                                                                     <tr>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color: black;"> Gambar Dashcam:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_dashcam']) ?>" width="100%" alt="<?= $g['gambar_dashcam'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color: black;"> Gambar Klakson:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_klakson']) ?>" width="100%" alt="<?= $g['gambar_klakson'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
+                                                                        <?php if ($g['gambar_dashcam'] != 'kosong') { ?>
+                                                                            <td style=" text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar Dashcam:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_dashcam']) ?>" width="100%" alt="<?= $g['gambar_dashcam'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
+                                                                        <?php if ($g['gambar_klakson'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar Klakson:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_klakson']) ?>" width="100%" alt="<?= $g['gambar_klakson'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
                                                                     </tr>
                                                                 </table>
                                                             </div>
                                                             <div class="row">
                                                                 <table style="width: 100%;">
                                                                     <tr>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color:black;"> Gambar Cap Ban:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_cap_ban']) ?>" width="100%" alt="<?= $g['gambar_cap_ban'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color:black;"> Gambar Jok:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_jok']) ?>" width="100%" alt="<?= $g['gambar_jok'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
+                                                                        <?php if ($g['gambar_door_trim'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar Cap Ban:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_door_trim']) ?>" width="100%" alt="<?= $g['gambar_door_trim'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
+                                                                        <?php if ($g['gambar_jok'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar Jok:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_jok']) ?>" width="100%" alt="<?= $g['gambar_jok'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
                                                                     </tr>
                                                                 </table>
                                                             </div>
                                                             <div class="row">
                                                                 <table style="width: 100%;">
                                                                     <tr>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color:black;"> Gambar Speaker:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_speaker']) ?>" width="100%" alt="<?= $g['gambar_speaker'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color:black;"> Gambar Glovebox:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_glovebox']) ?>" width="100%" alt="<?= $g['gambar_glovebox'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
+                                                                        <?php if ($g['gambar_speaker'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar Speaker:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_speaker']) ?>" width="100%" alt="<?= $g['gambar_speaker'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
+                                                                        <?php if ($g['gambar_glovebox'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar Glovebox:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_glovebox']) ?>" width="100%" alt="<?= $g['gambar_glovebox'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
                                                                     </tr>
                                                                 </table>
                                                             </div>
 
                                                             <!-- Bagian Dalam Kendaraan End -->
                                                             <!-- Bagain Luar Kendaraan Start -->
-                                                            <h4 class="card-subtitle mb-3 mt-3" style="color: black; font-size:17px">Bagian Luar Kendaraan</h4>
+                                                            <!-- <h4 class="card-subtitle mb-3 mt-3" style="color: black; font-size:17px">Bagian Luar Kendaraan</h4> -->
                                                             <div class="row">
                                                                 <table style="width: 100%;">
                                                                     <tr>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color:black;"> Gambar Cap Ban:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_cap_ban']) ?>" width="100%" alt="<?= $g['gambar_cap_ban'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color:black;"> Gambar Body:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_body']) ?>" width="100%" alt="<?= $g['gambar_body'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
+                                                                        <?php if ($g['gambar_cap_ban'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar Cap Ban:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_cap_ban']) ?>" width="100%" alt="<?= $g['gambar_cap_ban'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
+                                                                        <?php if ($g['gambar_body'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar Body:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_body']) ?>" width="100%" alt="<?= $g['gambar_body'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
                                                                     </tr>
                                                                 </table>
                                                             </div>
                                                             <div class="row">
                                                                 <table style="width: 100%;">
                                                                     <tr>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color:black;"> Gambar Bemper Depan:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_bemper_depan']) ?>" width="100%" alt="<?= $g['gambar_bemper_depan'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color:black;"> Gambar Bemper Belakang:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_bemper_belakang']) ?>" width="100%" alt="<?= $g['gambar_bemper_belakang'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
+                                                                        <?php if ($g['gambar_bemper_depan'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar Bemper Depan:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_bemper_depan']) ?>" width="100%" alt="<?= $g['gambar_bemper_depan'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
+                                                                        <?php if ($g['gambar_bemper_belakang'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar Bemper Belakang:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_bemper_belakang']) ?>" width="100%" alt="<?= $g['gambar_bemper_belakang'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
                                                                     </tr>
                                                                 </table>
                                                             </div>
                                                             <div class="row">
                                                                 <table style="width: 100%;">
                                                                     <tr>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color:black;"> Gambar Fender Depan:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_fender_depan']) ?>" width="100%" alt="<?= $g['gambar_fender_depan'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color:black;"> Gambar Fender Belakang:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_fender_belakang']) ?>" width="100%" alt="<?= $g['gambar_fender_belakang'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
+                                                                        <?php if ($g['gambar_fender_depan'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar Fender Depan:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_fender_depan']) ?>" width="100%" alt="<?= $g['gambar_fender_depan'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
+                                                                        <?php if ($g['gambar_fender_belakang'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar Fender Belakang:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_fender_belakang']) ?>" width="100%" alt="<?= $g['gambar_fender_belakang'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
                                                                     </tr>
                                                                 </table>
                                                             </div>
                                                             <div class="row">
                                                                 <table style="width: 100%;">
                                                                     <tr>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color:black;"> Gambar Box:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_box']) ?>" width="100%" alt="<?= $g['gambar_box'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color:black;"> Gambar Headlamp:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_headlamp']) ?>" width="100%" alt="<?= $g['gambar_headlamp'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
+                                                                        <?php if ($g['gambar_box'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar Box:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_box']) ?>" width="100%" alt="<?= $g['gambar_box'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
+                                                                        <?php if ($g['gambar_headlamp'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar Headlamp:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_headlamp']) ?>" width="100%" alt="<?= $g['gambar_headlamp'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
                                                                     </tr>
                                                                 </table>
                                                             </div>
                                                             <div class="row">
                                                                 <table style="width: 100%;">
                                                                     <tr>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color:black;"> Gambar Stoplamp:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_stoplamp']) ?>" width="100%" alt="<?= $g['gambar_stoplamp'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color:black;"> Gambar kaca Depan:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_kaca_depan']) ?>" width="100%" alt="<?= $g['gambar_kaca_depan'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
+                                                                        <?php if ($g['gambar_stoplamp'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar Stoplamp:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_stoplamp']) ?>" width="100%" alt="<?= $g['gambar_stoplamp'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
+                                                                        <?php if ($g['gambar_kaca_depan'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar kaca Depan:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_kaca_depan']) ?>" width="100%" alt="<?= $g['gambar_kaca_depan'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
                                                                     </tr>
                                                                 </table>
                                                             </div>
                                                             <div class="row">
                                                                 <table style="width: 100%;">
                                                                     <tr>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color:black;"> Gambar Spion:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_spion']) ?>" width="100%" alt="<?= $g['gambar_spion'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color:black;"> Gambar Ban Depan:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_ban_depan']) ?>" width="100%" alt="<?= $g['gambar_ban_depan'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
+                                                                        <?php if ($g['gambar_spion'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar Spion:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_spion']) ?>" width="100%" alt="<?= $g['gambar_spion'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
+                                                                        <?php if ($g['gambar_ban_depan'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar Ban Depan:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_ban_depan']) ?>" width="100%" alt="<?= $g['gambar_ban_depan'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
                                                                     </tr>
                                                                 </table>
                                                             </div>
                                                             <div class="row">
                                                                 <table style="width: 100%;">
                                                                     <tr>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color:black;"> Gambar Ban Belakang:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_ban_belakang']) ?>" width="100%" alt="<?= $g['gambar_ban_belakang'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color:black;"> Gambar Ban Serep:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_ban_serep']) ?>" width="100%" alt="<?= $g['gambar_ban_serep'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
+                                                                        <?php if ($g['gambar_ban_belakang'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar Ban Belakang:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_ban_belakang']) ?>" width="100%" alt="<?= $g['gambar_ban_belakang'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
+                                                                        <?php if ($g['gambar_ban_serep'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar Ban Serep:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_ban_serep']) ?>" width="100%" alt="<?= $g['gambar_ban_serep'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
                                                                     </tr>
                                                                 </table>
                                                             </div>
                                                             <!-- Bagian Luar Kendaraan End -->
                                                             <!-- Toolkit Start -->
-                                                            <h4 class="card-subtitle mb-3" style="color:black; padding-top: 9%; font-size: 20px;">Toolkit</h4>
+                                                            <!-- <h4 class="card-subtitle mb-3" style="color:black; padding-top: 9%; font-size: 20px;">Toolkit</h4> -->
                                                             <div class="row">
                                                                 <table style="width: 100%;">
                                                                     <tr>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color:black;"> Gambar Dongkrak:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_dongkrak']) ?>" width="100%" alt="<?= $g['gambar_dongkrak'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color:black;"> Gambar Kunci Roda:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_kunci_roda']) ?>" width="100%" alt="<?= $g['gambar_kunci_roda'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
+                                                                        <?php if ($g['gambar_dongkrak'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar Dongkrak:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_dongkrak']) ?>" width="100%" alt="<?= $g['gambar_dongkrak'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
+                                                                        <?php if ($g['gambar_kunci_roda'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar Kunci Roda:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_kunci_roda']) ?>" width="100%" alt="<?= $g['gambar_kunci_roda'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
                                                                     </tr>
                                                                 </table>
                                                             </div>
                                                             <div class="row">
                                                                 <table style="width: 100%;">
                                                                     <tr>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color:black;"> Gambar Stik Roda:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_stik_roda']) ?>" width="100%" alt="<?= $g['gambar_stik_roda'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="text-align: left;">
+                                                                        <?php if ($g['gambar_stik_roda'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar Stik Roda:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_stik_roda']) ?>" width="100%" alt="<?= $g['gambar_stik_roda'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
+                                                                        <?php if ($g['gambar_kotak_p3k'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
 
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color:black;"> Gambar Kotak P3K:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_kotak_p3k']) ?>" width="100%" alt="<?= $g['gambar_kotak_p3k'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar Kotak P3K:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_kotak_p3k']) ?>" width="100%" alt="<?= $g['gambar_kotak_p3k'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
                                                                     </tr>
                                                                 </table>
                                                             </div>
                                                             <div class="row">
                                                                 <table style="width: 100%;">
                                                                     <tr>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color:black;"> Gambar Warning Tirangel:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_warning_triangle']) ?>" width="100%" alt="<?= $g['gambar_warning_triangle'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color:black;"> </strong>
-                                                                                <img src="" width="100%" alt="" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
+                                                                        <?php if ($g['gambar_warning_triangle'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar Warning Tirangel:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_warning_triangle']) ?>" width="100%" alt="<?= $g['gambar_warning_triangle'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
+                                                                        <?php if ($g['gambar_stnk'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> </strong>
+                                                                                    <img src="" width="100%" alt="" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
                                                                     </tr>
                                                                 </table>
                                                             </div>
                                                             <!-- Toolkit end -->
                                                             <!-- Dokumen Start -->
-                                                            <h4 class="card-subtitle mb-3 mt-3" style="color:black; font-size: 20px;">Dokumen</h4>
+                                                            <!-- <h4 class="card-subtitle mb-3 mt-3" style="color:black; font-size: 20px;">Dokumen</h4> -->
                                                             <div class="row">
                                                                 <table style="width: 100%;">
                                                                     <tr>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color:black;"> Gambar STNK:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_stnk']) ?>" width="100%" alt="<?= $g['gambar_stnk'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color:black;"> Gambar KIR:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_kir']) ?>" width="100%" alt="<?= $g['gambar_kir'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
+                                                                        <?php if ($g['gambar_stnk'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar STNK:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_stnk']) ?>" width="100%" alt="<?= $g['gambar_stnk'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
+                                                                        <?php if ($g['gambar_kir'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar KIR:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_kir']) ?>" width="100%" alt="<?= $g['gambar_kir'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
                                                                     </tr>
                                                                 </table>
                                                             </div>
                                                             <div class="row">
                                                                 <table style="width: 100%;">
                                                                     <tr>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color:black;"> Gambar Kartu Kir:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_kartu_kir']) ?>" width="100%" alt="<?= $g['gambar_kartu_kir'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color:black;"> Gambar SIPA:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_sipa']) ?>" width="100%" alt="<?= $g['gambar_sipa'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
+                                                                        <?php if ($g['gambar_kartu_kir'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar Kartu Kir:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_kartu_kir']) ?>" width="100%" alt="<?= $g['gambar_kartu_kir'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
+                                                                        <?php if ($g['gambar_sipa'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar SIPA:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_sipa']) ?>" width="100%" alt="<?= $g['gambar_sipa'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
                                                                     </tr>
                                                                 </table>
                                                             </div>
                                                             <div class="row">
                                                                 <table style="width: 100%;">
                                                                     <tr>
+                                                                        <?php if ($g['gambar_ibm'] != 'kosong') { ?>
+                                                                            <td style="text-align: left;">
+                                                                                <div class="image-title-container">
+                                                                                    <strong style="color:black; display: block; margin-bottom: 5px;"> Gambar IBM:</strong>
+                                                                                    <img src="<?= $getImage($g['gambar_ibm']) ?>" width="100%" alt="<?= $g['gambar_ibm'] ?>" style="border: 1px solid black;">
+                                                                                </div>
+                                                                            </td>
+                                                                        <?php } ?>
                                                                         <td style="text-align: left;">
                                                                             <div class="image-title-container">
-                                                                                <strong style="color:black;"> Gambar IBM:</strong>
-                                                                                <img src="<?= $getImage($g['gambar_ibm']) ?>" width="100%" alt="<?= $g['gambar_ibm'] ?>" style="border: 1px solid black;">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="text-align: left;">
-                                                                            <div class="image-title-container">
-                                                                                <strong style="color:black;"> </strong>
+                                                                                <strong style="color:black; display: block; margin-bottom: 5px;"> </strong>
                                                                                 <img src="" width="100%" alt="Tidak_ada" style="border: 1px solid black;">
                                                                             </div>
                                                                         </td>

@@ -41,9 +41,14 @@ unset($_SESSION['error_message']);
                             </div>
                         <?php endif; ?>
 
-                        <div class="card-header justify-content-between">
+                        <div class="card-header justify-content-">
                             <h4>Table</h4>
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#tambahModal">Tambah</button>
+                            <div class="card-header-action">
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#tambahModal">Tambah</button>
+                                <a href="laporan_excel.php">
+                                    <button class="btn btn-success"><i class="fas fa-file-excel"></i> Export Excel</button>
+                                </a>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -54,8 +59,8 @@ unset($_SESSION['error_message']);
                                                 No
                                             </th>
                                             <th>Nomor Polisi</th>
-                                            <th>Nama Pemilik</th>
-                                            <th>Nomor Pemilik</th>
+                                            <th>Pemakai</th>
+                                            <th>Telpon</th>
                                             <th>Jenis Kendaraan</th>
                                             <th>Kota</th>
                                             <th>Model</th>
@@ -112,11 +117,11 @@ unset($_SESSION['error_message']);
                             <input type="text" class="form-control" name="no_plat" id="no_plat" placeholder="B 1234 XYZ" required>
                         </div>
                         <div class="form-group">
-                            <label>Nama Pemilik Kendraan</label>
-                            <input type="text" class="form-control" name="namaPemilik" id="namaPemilik" placeholder="Nama Pemilik" required>
+                            <label>Pemakai</label>
+                            <input type="text" class="form-control" name="namaPemilik" id="namaPemilik" placeholder="Nama Pemakai" required>
                         </div>
                         <div class="form-group">
-                            <label>Nomor Telfon Pemilik</label>
+                            <label>Telpon</label>
                             <input type="text" class="form-control" name="nomorPemilik" id="nomorPemilik" placeholder="08*******" required>
                         </div>
                         <div class="form-group">
@@ -171,11 +176,11 @@ unset($_SESSION['error_message']);
                                 <input type="text" class="form-control" name="no_plat" id="no_plat" value="<?= $a['nomor_plat'] ?>" required>
                             </div>
                             <div class="form-group">
-                                <label>Nama Pemilik Kendraan</label>
+                                <label>Pemakai</label>
                                 <input type="text" class="form-control" name="namaPemilik" id="namaPemilik" value="<?= $a['nama_pemilik'] ?>" placeholder="Nama Pemilik" required>
                             </div>
                             <div class="form-group">
-                                <label>Nomor Telfon Pemilik</label>
+                                <label>Telpon</label>
                                 <input type="text" class="form-control" value="<?= $a['nomor_telp_pemilik'] ?>" name="nomorPemilik" id="nomorPemilik" placeholder="08*******" required>
                             </div>
                             <div class="form-group">

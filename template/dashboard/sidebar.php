@@ -27,21 +27,13 @@ function checkRole($role)
 
             <?php if (checkRole('admin')) : ?>
                 <li class="menu-header">Manajemen Data Kendaraan</li>
-                <li class="dropdown <?php echo isActive('data_kendaraan.php') . ' ' . isActive('passenger.php') . ' ' . isActive('niaga.php') . ' ' . isActive('motor.php'); ?>">
+                <li class="dropdown <?php echo isActive('data_kendaraan.php') . '  '; ?>">
                     <a href="#" class="nav-link has-dropdown"><i class="fas fa-bicycle"></i> <span>Data Kendaraan</span></a>
                     <ul class="dropdown-menu">
                         <li class="<?php echo isActive('data_kendaraan.php'); ?>">
                             <a class="nav-link" href="data_kendaraan.php">Tambah Data Kendaraan</a>
                         </li>
-                        <li class="<?php echo isActive('passenger.php'); ?>">
-                            <a class="nav-link" href="passenger.php">Passenger</a>
-                        </li>
-                        <li class="<?php echo isActive('niaga.php'); ?>">
-                            <a class="nav-link" href="niaga.php">Niaga</a>
-                        </li>
-                        <li class="<?php echo isActive('motor.php'); ?>">
-                            <a class="nav-link" href="motor.php">Motor</a>
-                        </li>
+
                     </ul>
                 </li>
             <?php endif; ?>

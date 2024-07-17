@@ -10,6 +10,8 @@ include("template/dashboard/sidebar.php");
 $totalSudahAudit = getTotalAudit($koneksi);
 $totalBelumAudit = getTotalBelumAudit($koneksi);
 $totalTemuan = getTotalTemuan($koneksi);
+$totalBelumSelesai = getTotalBelumTerselesaikan($koneksi);
+$totalSudahSelesai = getTotalSudahTerselesaikan($koneksi);
 ?>
 
 <div class="main-content">
@@ -75,8 +77,8 @@ $totalTemuan = getTotalTemuan($koneksi);
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card card-statistic-1">
-                        <div class="card-icon bg-danger">
-                            <i class="far fa-file"></i>
+                        <div class="card-icon bg-success">
+                            <i class="fas fa-check-circle"></i>
                         </div>
                         <div class="card-wrap">
                             <a href="riwayat_audit.php">
@@ -93,7 +95,7 @@ $totalTemuan = getTotalTemuan($koneksi);
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card card-statistic-1">
                         <div class="card-icon bg-warning">
-                            <i class="far fa-file"></i>
+                            <i class="fas fa-clock"></i>
                         </div>
                         <div class="card-wrap">
                             <a href="data_kendaraan.php">
@@ -110,7 +112,7 @@ $totalTemuan = getTotalTemuan($koneksi);
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card card-statistic-1">
                         <div class="card-icon bg-info">
-                            <i class="fas fa-exclamation-circle"></i>
+                            <i class="fas fa-bug"></i>
                         </div>
                         <div class="card-wrap">
                             <a href="riwayat_audit.php">
@@ -119,6 +121,40 @@ $totalTemuan = getTotalTemuan($koneksi);
                                 </div>
                                 <div class="card-body">
                                     <?= $totalTemuan ?>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-danger">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <a href="riwayat_audit.php">
+                                <div class="card-header">
+                                    <h4>Total Belum Terselesaikan</h4>
+                                </div>
+                                <div class="card-body">
+                                    <?= $totalBelumSelesai ?>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-success">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <a href="riwayat_audit.php">
+                                <div class="card-header">
+                                    <h4>Total Sudah Terselesaikan</h4>
+                                </div>
+                                <div class="card-body">
+                                    <?= $totalSudahSelesai ?>
                                 </div>
                             </a>
                         </div>
