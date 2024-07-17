@@ -481,17 +481,14 @@ require_once 'function.php';
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card mb-3">
-                                                <div class="card-body">
-                                                    <h3 class="card-title">Dokumentasi</h3>
+                                            <div class=" mb-3">
+                                                <div class="">
                                                     <?php
                                                     $gambar_query = "SELECT * FROM detail_gambar WHERE id_audit_detail = " . $detail['id'];
                                                     $result_detail_gambar = mysqli_query($koneksi, $gambar_query);
                                                     if (mysqli_num_rows($result_detail_gambar) > 0) {
                                                         while ($g = mysqli_fetch_assoc($result_detail_gambar)) {
                                                     ?>
-                                                            <!-- Bagian Dalam Kendaraan Start -->
-                                                            <!-- <h4 class="card-subtitle mb-3 mt-3" style="color:black; font-size:17px">Bagian Dalam Kendaraan</h4> -->
                                                             <div class="row">
                                                                 <table style="width: 100%;">
                                                                     <tr>
