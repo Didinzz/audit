@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 12, 2024 at 03:54 AM
+-- Generation Time: Jul 17, 2024 at 10:25 AM
 -- Server version: 8.0.30
--- PHP Version: 8.2.19
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -35,6 +35,13 @@ CREATE TABLE `audit` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Dumping data for table `audit`
+--
+
+INSERT INTO `audit` (`id`, `id_kendaraan`, `id_user`, `tanggal_audit`, `created_at`, `updated_at`) VALUES
+(43, 8, 8, '2024-07-17', '2024-07-17 08:38:50', '2024-07-17 08:38:50');
 
 -- --------------------------------------------------------
 
@@ -77,8 +84,16 @@ CREATE TABLE `detail_audit` (
   `kartu_kir` enum('Ada','Tidak Ada') NOT NULL,
   `sipa` enum('Ada','Tidak Ada') NOT NULL,
   `ibm` enum('Ada','Tidak Ada') NOT NULL,
-  `temuan` text NOT NULL
+  `temuan` text NOT NULL,
+  `status_temuan` enum('Open','Close') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Dumping data for table `detail_audit`
+--
+
+INSERT INTO `detail_audit` (`id`, `id_audit`, `cap_ban`, `stiker`, `dashcam`, `sunvisor`, `klakson`, `door_trim`, `jok`, `speaker`, `glovebox`, `body`, `bemper_depan`, `bemper_belakang`, `fender_depan`, `fender_belakang`, `box`, `headlamp`, `stoplamp`, `kaca_depan`, `spion`, `ban_depan`, `ban_belakang`, `ban_serep`, `dongkrak`, `kunci_roda`, `stik_roda`, `kotak_p3k`, `warning_tirangel`, `stnk`, `kir`, `kartu_kir`, `sipa`, `ibm`, `temuan`, `status_temuan`) VALUES
+(37, 43, 'Ada', 'Ada', 'Ada', 'Ada', 'Ada', 'Ada', 'Bagus', 'Bagus', 'Ada', 'Mulus', 'Mulus', 'Mulus', 'Mulus', 'Mulus', 'Mulus', 'Mulus', 'Mulus', 'Bagus', 'Bagus', 'Ada', 'Ada', 'Ada', 'Ada', 'Ada', 'Ada', 'Ada', 'Ada', 'Ada', 'Ada', 'Ada', 'Ada', 'Ada', '     ini adalah temuan audit', 'Close');
 
 -- --------------------------------------------------------
 
@@ -123,6 +138,13 @@ CREATE TABLE `detail_gambar` (
   `id_audit_detail` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `detail_gambar`
+--
+
+INSERT INTO `detail_gambar` (`id`, `gambar_cap_ban`, `gambar_stiker`, `gambar_dashcam`, `gambar_sunvisor`, `gambar_klakson`, `gambar_door_trim`, `gambar_jok`, `gambar_speaker`, `gambar_glovebox`, `gambar_body`, `gambar_bemper_depan`, `gambar_bemper_belakang`, `gambar_fender_depan`, `gambar_fender_belakang`, `gambar_box`, `gambar_headlamp`, `gambar_stoplamp`, `gambar_kaca_depan`, `gambar_spion`, `gambar_ban_depan`, `gambar_ban_belakang`, `gambar_ban_serep`, `gambar_dongkrak`, `gambar_kunci_roda`, `gambar_stik_roda`, `gambar_kotak_p3k`, `gambar_warning_triangle`, `gambar_stnk`, `gambar_kir`, `gambar_kartu_kir`, `gambar_sipa`, `gambar_ibm`, `id_audit_detail`) VALUES
+(14, 'kosong', 'kosong', 'kosong', 'kosong', 'kosong', 'kosong', 'kosong', '6697831a07950_2021-06-20 (2).png', 'kosong', 'kosong', 'kosong', 'kosong', 'kosong', 'kosong', 'kosong', 'kosong', 'kosong', 'kosong', 'kosong', 'kosong', 'kosong', 'kosong', 'kosong', 'kosong', '6697831a07d15_2021-06-12 (1).png', '6697831a07f76_2021-06-12.png', 'kosong', 'kosong', 'kosong', 'kosong', 'kosong', 'kosong', 37);
+
 -- --------------------------------------------------------
 
 --
@@ -150,7 +172,8 @@ CREATE TABLE `kendaraan` (
 INSERT INTO `kendaraan` (`id`, `nama_pemilik`, `nomor_telp_pemilik`, `nomor_plat`, `jenis_kendaraan`, `kota`, `model`, `tahun_pembuatan`, `bu`, `created_at`, `updated_at`) VALUES
 (6, 'Albert Enstein', '08346265909', 'DM 29123', 'Toyota Avanza', 'Suka Bummi', 'baru', '2022', 'tes', '2024-07-08 03:57:38', '2024-07-08 03:57:38'),
 (8, 'Jhon Alpha Edison', '08122121', 'LlhklqR97u', 'f3hC5v4Wcy', 'kr39XXgrqW', '2B8cHPh3rF', '2011', 'snlK3IVg4Y', '2024-07-08 04:21:18', '2024-07-08 04:21:18'),
-(9, 'Hitler', '08119922', 'b 22119', 'Lamborgini', 'Kota Hantu', 'Lama', '2027', '1231123', '2024-07-10 11:32:22', '2024-07-10 11:32:22');
+(9, 'Hitler', '08119922', 'b 22119', 'Lamborgini', 'Kota Hantu', 'Lama', '2027', '1231123', '2024-07-10 11:32:22', '2024-07-10 11:32:22'),
+(10, 'didin', '0812311', 'DM 29123', 'porche', 'gorontalo', 'baru', '2024', 'dksjdkfjalfjalk', '2024-07-17 08:08:02', '2024-07-17 08:08:02');
 
 -- --------------------------------------------------------
 
@@ -220,25 +243,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `audit`
 --
 ALTER TABLE `audit`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `detail_audit`
 --
 ALTER TABLE `detail_audit`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `detail_gambar`
 --
 ALTER TABLE `detail_gambar`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `kendaraan`
 --
 ALTER TABLE `kendaraan`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users`
